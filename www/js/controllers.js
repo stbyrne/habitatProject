@@ -16,9 +16,8 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $ionicNavBarDelegate, $ionicHistory) {
+.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $ionicNavBarDelegate, $ionicHistory, Api, ApiEndpoint) {
     
-
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -57,14 +56,14 @@ angular.module('starter.controllers', [])
     });
       
     var projectName = $scope.projectData.name,
-        accessToken = '0f710cade9cc5e747f59de22d2be5351',
-        url = "https://habitat.inkling.com/api/contentbuilds/?access_token=" + accessToken + "&shortname=" + projectName + "&keepEmailOptions=true";
-        /*url = projectName + ".json";*/
+        accessToken = '0f710cade9cc5e747f59de22d2be5351';
+        /*url = Api.getData() + "?access_token=" + accessToken + "&shortname=" + projectName + "&keepEmailOptions=true";*/
       
-    $http.get(url).then(function(data){
+    /*$http.get(url).then(function(data){*/
+    Api.getApiData(accessToken, projectName).then(function(data){
         
-        console.log(data.data);
-        $scope.results = data.data.result;
+        console.log(data);
+        $scope.results = data.result;
         
         $ionicLoading.hide();
         
@@ -133,14 +132,16 @@ angular.module('starter.controllers', [])
         
         console.log('Trying to Build');
         
-        var url = 'https://habitat.inkling.com/api/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
+        /*var url = ApiEndpoint.url + "/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",*/
+        var url = ApiEndpoint.url + "/contentbuilds?access_token=0f710cade9cc5e747f59de22d2be5351",
             parameter = {"shortname":"sn_b2c2","userParameters":{"track":"epub","autoDownload":false,"targets":["epub"]}};
         
         $http({
             url: url,
             method: "POST",
+            
             /*data: {"shortname":"sn_b2c2","userParameters":{"track":"epub","autoDownload":false,"targets":["epub"]}}*/
-            data: {"shortname":"sn_b2c2","type": "epub"}
+            data: parameter
         }).then(function(data){
             
             console.log(data);
