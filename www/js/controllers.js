@@ -133,14 +133,14 @@ angular.module('starter.controllers', [])
         
         console.log('Trying to Build');
         
-        var url = 'https://habitat.inkling.com/api/contentbuilds/?access_token=0f710cade9cc5e747f59de22d2be5351',
+        var url = 'https://habitat.inkling.com/api/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
             parameter = {"shortname":"sn_b2c2","userParameters":{"track":"epub","autoDownload":false,"targets":["epub"]}};
         
         $http({
-            url: 'https://habitat.inkling.com/api/contentbuilds/',
+            url: url,
             method: "POST",
-            data: {"shortname":"sn_b2c2","userParameters":{"track":"epub","autoDownload":false,"targets":["epub"]}}
-            /*data: {"shortname":"sn_b2c2","type": "epub"}*/
+            /*data: {"shortname":"sn_b2c2","userParameters":{"track":"epub","autoDownload":false,"targets":["epub"]}}*/
+            data: {"shortname":"sn_b2c2","type": "epub"}
         }).then(function(data){
             
             console.log(data);
