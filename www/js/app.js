@@ -7,7 +7,7 @@
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .constant('ApiEndpoint', {
-  url: 'http://localhost:8100/api'
+  url: 'https://partner.inkling.com'
 })
 
 .run(function($ionicPlatform) {
@@ -26,7 +26,10 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
+    
+    $httpProvider.defaults.withCredentials = true;
+    /*$httpProvider.defaults.headers.common['X-Requested-With'] = undefined;                  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';*/
     
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
     

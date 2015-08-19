@@ -3,10 +3,10 @@ angular.module('starter.services', [])
 .factory('Api', function($http, $q, ApiEndpoint) {
   console.log('ApiEndpoint', ApiEndpoint)
 
-  var getApiData = function(accessToken, projectName) {
+  var getApiData = function(s9ID, accessToken) {
     var q = $q.defer();
       
-  var url = ApiEndpoint.url + "/contentbuilds?access_token=" + accessToken + "&shortname=" + projectName + "&keepEmailOptions=true";
+  var url = ApiEndpoint.url + '/contentbuilds/' + s9ID + accessToken;
 
     $http.get(url)
     .success(function(data) {

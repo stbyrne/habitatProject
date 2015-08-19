@@ -11,8 +11,8 @@
   ],
   "proxies": [
     {
-      "path": "/api",
-      "proxyUrl": "https://habitat.inkling.com/api"
+      "path": "/contentbuilds",
+      "proxyUrl": "https://partner.inkling.com/contentbuilds"
     }
   ]
 }
