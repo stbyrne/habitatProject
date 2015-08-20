@@ -7,7 +7,7 @@
     </ion-nav-buttons>
     <ion-content>
         <ion-list>
-            <div>
+            <div ng-if="projectDetails[0].shortname">
                 <ion-item class="item-divider item-inkling icon item-icon-left">
                 <i class="icon ion-ios-browsers-outline"></i>{{projectDetails[0].shortname}}</ion-item>
                 <ion-item class="item-divider item-hmhdark">

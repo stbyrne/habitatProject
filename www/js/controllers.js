@@ -57,18 +57,18 @@ angular.module('starter.controllers', [])
       
     var projectName = $scope.projectData.name,
         accessToken = '?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
-        s9ID = '082df23d7c79961406ba9ce12ce2d448806';
+        s9ID = '082df23d7c79961406ba9ce12ce2d448806',
+        accessToken = '?access_token=0f710cade9cc5e747f59de22d2be5351';
         /*url = Api.getData() + "?access_token=" + accessToken + "&shortname=" + projectName + "&keepEmailOptions=true";*/
       
     $http({
-           url: 'https://partner.inkling.com/contentbuilds' + '/' + s9ID + accessToken,
+           url: 'https://habitat.inkling.com/api/contentbuilds/' + accessToken + '&shortname=' + projectName,
            method: 'GET' 
          
           }).then(function(data){
-    /*Api.getApiData(s9ID, accessToken).then(function(data){*/
         
-        console.log(data);
-        $scope.results = data.result;
+        console.log(data.data);
+        $scope.results = data.data.result;
         
         $ionicLoading.hide();
         
@@ -142,9 +142,9 @@ angular.module('starter.controllers', [])
         var url = 'https://partner.inkling.com/contentbuilds',
             accessToken = '?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
         /*var url = ApiEndpoint.url + "/contentbuilds?access_token=0f710cade9cc5e747f59de22d2be5351",*/
-            parameter = {shortname:'sn_b2c2',type:'epub'};
+            parameter = JSON.stringify({shortname:'sn_b2c2',type:'epub'});
         
-        /*$http.post(url + accessToken, parameter).then(function(data){
+        /*$http.post(url + accessToken, parameter, {headers: {'Content-Type': 'application/json'}}).then(function(data){
             
             console.log(data);
             $ionicLoading.hide();
@@ -157,7 +157,8 @@ angular.module('starter.controllers', [])
         $http({
             url: url + accessToken,
             method: "POST",
-            data: {'shortname': 'sn_b2c2'}
+            data: JSON.stringify({shortname:'sn_b2c2',type:'epub'}),
+            headers: {'Content-Type': 'application/json'}
         }).then(function(data){
             
             console.log(data);
