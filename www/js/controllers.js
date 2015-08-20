@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $ionicNavBarDelegate, $ionicHistory, Api, ApiEndpoint) {
+.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $ionicNavBarDelegate, $ionicHistory) {
     
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -60,8 +60,12 @@ angular.module('starter.controllers', [])
         s9ID = '082df23d7c79961406ba9ce12ce2d448806';
         /*url = Api.getData() + "?access_token=" + accessToken + "&shortname=" + projectName + "&keepEmailOptions=true";*/
       
-    /*$http.get(url).then(function(data){*/
-    Api.getApiData(s9ID, accessToken).then(function(data){
+    $http({
+           url: 'https://partner.inkling.com/contentbuilds' + '/' + s9ID + accessToken,
+           method: 'GET' 
+         
+          }).then(function(data){
+    /*Api.getApiData(s9ID, accessToken).then(function(data){*/
         
         console.log(data);
         $scope.results = data.result;
@@ -134,15 +138,26 @@ angular.module('starter.controllers', [])
         console.log('Trying to Build');
         
         /*var url = "https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",*/
-        var url = "https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",
+        /*var url = "https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",*/
+        var url = 'https://partner.inkling.com/contentbuilds',
             accessToken = '?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
         /*var url = ApiEndpoint.url + "/contentbuilds?access_token=0f710cade9cc5e747f59de22d2be5351",*/
             parameter = {shortname:'sn_b2c2',type:'epub'};
         
+        /*$http.post(url + accessToken, parameter).then(function(data){
+            
+            console.log(data);
+            $ionicLoading.hide();
+            
+        }, function(data, status, headers, config, statusText){
+            
+            $ionicLoading.hide();
+        })*/
+        
         $http({
-            url: '/contentbuilds' + accessToken,
+            url: url + accessToken,
             method: "POST",
-            data: {"shortname":"sn_b2c2","type":"epub"}
+            data: {'shortname': 'sn_b2c2'}
         }).then(function(data){
             
             console.log(data);
@@ -150,32 +165,20 @@ angular.module('starter.controllers', [])
             
         }, function(data, status, headers, config, statusText){
             
-            console.log('Data: ' + data);
-            console.log('Status: ' + status);
-            console.log('Headers: ' + headers);
-            console.log('Config: ' + config);
-            console.log('Status Text: ' + statusText);
             $ionicLoading.hide();
         })
         
         /*$.ajax({
-            url: 'https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
+            url: url + accessToken,
             type: "POST",
             dataType: "json",
-            xhrFields: {
-               withCredentials: true
-            },
-            crossDomain: true,
-            data: {"shortname":"sn_b2c2","type":"epub"},
             success: function(data){
                 $ionicLoading.hide();
                 console.log(data);
             },
             error: function(data, status, config){
                 $ionicLoading.hide();
-                console.log('Error 1' + data);
-                console.log('Error 2' + status);
-                console.log('Error 3' + config);
+                
             }
         });*/
         

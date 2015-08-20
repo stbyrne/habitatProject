@@ -8,11 +8,5 @@
   "watchPatterns": [
     "www/**/*",
     "!www/lib/**/*"
-  ],
-  "proxies": [
-    {
-      "path": "/contentbuilds",
-      "proxyUrl": "https://partner.inkling.com/contentbuilds"
-    }
   ]
 }

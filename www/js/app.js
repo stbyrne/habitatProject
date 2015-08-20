@@ -4,11 +4,8 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers'])
 
-.constant('ApiEndpoint', {
-  url: 'https://partner.inkling.com'
-})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -28,8 +25,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
     
-    $httpProvider.defaults.withCredentials = true;
-    /*$httpProvider.defaults.headers.common['X-Requested-With'] = undefined;                  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';*/
+        
+    /*$httpProvider.defaults.withCredentials = true;
+    $httpProvider.defaults.headers.common['X-Requested-With'] = undefined;
+    $httpProvider.defaults.headers.post = {"Content-Type": "application/json;charset=utf-8"};*/
+    /*$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';*/
     
     $ionicConfigProvider.backButton.previousTitleText(false).text('');
     
