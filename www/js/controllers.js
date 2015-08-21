@@ -16,7 +16,7 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $ionicNavBarDelegate, $ionicHistory) {
+.controller('ProjectCtrl', function($scope, $ionicModal, $http, $timeout, $ionicLoading, $ionicPopover, $state) {
     
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -25,29 +25,33 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
+  // Form data for the fetch modal
   $scope.projectData = {};
   $scope.projectData.name = '';
 
-  // Create the login modal that we will use later
+  // Create the fetch modal that we will use later
   $ionicModal.fromTemplateUrl('templates/fetch.html', {
     scope: $scope
-  }).then(function(modal) {
-    $scope.modal = modal;
+  }).then(function(fetchmodal) {
+    $scope.fetchmodal = fetchmodal;
   });
 
-  // Triggered in the login modal to close it
+  // Triggered in the fetch modal to close it
   $scope.closeProjectFetch = function() {
-      $scope.modal.hide();
+      $scope.fetchmodal.hide();
+      $scope.buildmodal.hide();
       $scope.projectData.name = '';
+      console.log('Closing modal');
   };
 
-  // Open the login modal
+  // Open the fetch modal
   $scope.fetch = function() {
-    $scope.modal.show();
+      $scope.fetchmodal.show();
+      console.log('Opening modal');
   };
+    
 
-  // Perform the login action when the user submits the login form
+  // Perform the action when the user submits the fetch form
   $scope.getProject = function() {
       
       $ionicLoading.show({
@@ -126,7 +130,31 @@ angular.module('starter.controllers', [])
     
   };
     
-    //Build a new project 
+  // Form data for the build modal
+  $scope.projectBuild = {};
+  $scope.projectData.name = '';
+
+  // Create the build modal that we will use later
+  $ionicModal.fromTemplateUrl('templates/build.html', {
+    scope: $scope
+  }).then(function(buildmodal) {
+    $scope.buildmodal = buildmodal;
+  });
+
+  // Triggered in the build modal to close it
+  $scope.closeProjectBuild = function() {
+      $scope.buildmodal.hide();
+      $scope.projectBuild.name = '';
+  };
+
+  // Open the build modal
+  $scope.build = function() {
+    $scope.buildmodal.show();
+  };
+    
+    //Build a new project
+    
+    
     
     $scope.buildProject = function() {
         
@@ -139,10 +167,11 @@ angular.module('starter.controllers', [])
         
         /*var url = "https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",*/
         /*var url = "https://partner.inkling.com/contentbuilds?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1",*/
-        var url = 'https://partner.inkling.com/contentbuilds',
+        var projectBuildName = $scope.projectData.name,
+            url = 'https://partner.inkling.com/contentbuilds',
             accessToken = '?access_token=p-970d21fbdd8540e99bd7b23ffb9e0af1',
         /*var url = ApiEndpoint.url + "/contentbuilds?access_token=0f710cade9cc5e747f59de22d2be5351",*/
-            parameter = JSON.stringify({shortname:'sn_b2c2',type:'epub'});
+            parameter = JSON.stringify({shortname:projectBuildName,type:'epub'});
         
         /*$http.post(url + accessToken, parameter, {headers: {'Content-Type': 'application/json'}}).then(function(data){
             
@@ -157,16 +186,19 @@ angular.module('starter.controllers', [])
         $http({
             url: url + accessToken,
             method: "POST",
-            data: JSON.stringify({shortname:'sn_b2c2',type:'epub'}),
+            data: parameter,
             headers: {'Content-Type': 'application/json'}
         }).then(function(data){
             
             console.log(data);
+            $scope.getProject();
+            $scope.doRefresh();
             $ionicLoading.hide();
             
-        }, function(data, status, headers, config, statusText){
+        }, function(data){
             
             $ionicLoading.hide();
+            $scope.openPopover();
         })
         
         /*$.ajax({
@@ -220,12 +252,18 @@ angular.module('starter.controllers', [])
         // Execute action
       });
     
+    $scope.doRefresh = function(){
+            $state.go($state.current, {}, {reload: true});
+            
+        }
+    
 })
 
 /*.controller('ProjectCtrl', function($scope) {
   $scope.projects = [];
 })*/
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('RenameCtrl', function($scope) {
+    console.log('Did it work?');
 });
  

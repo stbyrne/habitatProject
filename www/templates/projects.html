@@ -11,10 +11,11 @@
                 <ion-item class="item-divider item-inkling icon item-icon-left">
                 <i class="icon ion-ios-browsers-outline"></i>{{projectDetails[0].shortname}}</ion-item>
                 <ion-item class="item-divider item-hmhdark">
-                <p>{{projectDetails[0].initiator}}</p>
+                <i class="icon ion-ios-pricetag-outline"></i>
+                    Revision: {{projectDetails[0].revision}}, {{projectDetails[0].initiator}}
                 </ion-item>
                 <div class="item" >
-                    <button class="button button-block button-positive item-inkling" ng-click="buildProject()">Build New Epub</button>
+                    <button class="button button-block button-positive item-inkling" ng-click="build()">Build New Epub</button>
                 </div>
             </div>
 
