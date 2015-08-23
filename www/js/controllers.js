@@ -93,10 +93,11 @@ angular.module('starter.controllers', [])
                         created = project.createdAt,
                         date = new Date(created),
                         dateCreated = date.toUTCString().slice(0, -4),
-                        downloadLink = project.downloadLink;
+                        downloadLink = project.downloadLink,
+                        downloadPath = project.downloadPath.split('/').pop();
             
                       
-            this.push({shortname: shortname, revision: revision, initiator:initiator, dateCreated:dateCreated, downloadLink:downloadLink})
+            this.push({shortname: shortname, revision: revision, initiator:initiator, dateCreated:dateCreated, downloadLink:downloadLink, downloadPath:downloadPath})
 
                     /*this[key] = value['content'];*/
 
@@ -195,6 +196,7 @@ angular.module('starter.controllers', [])
             $scope.doRefresh();
             $ionicLoading.hide();
             
+            
         }, function(data){
             
             $ionicLoading.hide();
@@ -263,7 +265,15 @@ angular.module('starter.controllers', [])
   $scope.projects = [];
 })*/
 
-.controller('RenameCtrl', function($scope) {
-    console.log('Did it work?');
+.controller('DownloadCtrl', function($scope) {
+    
+    $scope.downloadFile = function(file){
+        saveAs();
+        
+    /*var options = { type: "application/epub;charset=utf-8" };
+    SaveAs.download(file, 'test.epub', options);*/
+           
+    }
+    
 });
  
