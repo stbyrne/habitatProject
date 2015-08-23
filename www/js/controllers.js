@@ -166,8 +166,12 @@ angular.module('starter.controllers', [])
             $ionicLoading.hide();
             
 <<<<<<< HEAD
+<<<<<<< HEAD
             
         }, function(data){
+=======
+        }, function(data, status, headers, config, statusText){
+>>>>>>> parent of 0d566a1... commit_work_9
 =======
         }, function(data, status, headers, config, statusText){
 >>>>>>> parent of 0d566a1... commit_work_9
@@ -233,6 +237,7 @@ angular.module('starter.controllers', [])
 })*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 .controller('DownloadCtrl', function($scope) {
     
     $scope.downloadFile = function(file){
@@ -243,6 +248,9 @@ angular.module('starter.controllers', [])
            
     }
     
+=======
+.controller('PlaylistCtrl', function($scope, $stateParams) {
+>>>>>>> parent of 0d566a1... commit_work_9
 =======
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 >>>>>>> parent of 0d566a1... commit_work_9
